@@ -46,29 +46,39 @@ const PLAYER_INFO = {
     1:{
         name: "RED",
         marker: "X",
-        cells: [],
     },
     2:{
         name: "BLUE",
         marker: "O",
-        cells: [],
     },
 };
 
 let activePlayer = 1;
 
-function clearBoard() {
-    for (let playerID of Object.keys(PLAYER_INFO))
-        clearPlayerCells(PLAYER_INFO[playerID]["cells"]);
+
+
+const board = [];
+clearBoard(board);
+
+function clearBoard(board) {
+    for (let h = 0; h <= BOARD_WIDTH; h++) {
+        const row = [];
+        for (let w = 0; w <= BOARD_HEIGHT; w++) {
+            row.push(null);
+        }
+        board.push(row);
+    }
 }
 
-function clearPlayerCells(cells) {
-    for (let i = 0; i < cells.length; i++) {
-        const cell = document.querySelector("#cell-"+cells[i].x+"-"+cells[i].y);
-        cell.classList.remove("ownedByPlayer1", "ownedByPlayer2");
-        cell.textContent = "";
+function clearPlayerCells(playerId, board) {
+    for (let h = 0; h < board.length; h++) {
+        const row = board[h];
+        for (let w = 0; w <= BOARD_HEIGHT; w++) {
+            if (row[w] === playerId){
+                row[w] = null;
+            }
+        }
     }
-    cells.length = 0;
 }
 
 function countAllClickedCells() {

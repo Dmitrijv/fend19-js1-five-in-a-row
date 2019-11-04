@@ -56,33 +56,40 @@ const PLAYER_INFO = {
 let activePlayer = 1;
 
 
+let board = [];
+board = clearBoard(board);
 
-const board = [];
-clearBoard(board);
-
-function clearBoard(board) {
-    for (let h = 0; h <= BOARD_WIDTH; h++) {
-        const row = [];
-        for (let w = 0; w <= BOARD_HEIGHT; w++) {
+function clearBoard(currentBoard) {
+    currentBoard = [];
+    for (let h = 0; h < BOARD_WIDTH; h++) {
+        let row = [];
+        for (let w = 0; w < BOARD_HEIGHT; w++)
             row.push(null);
-        }
-        board.push(row);
+        currentBoard.push(row);
     }
+    return currentBoard;
 }
 
 function clearPlayerCells(playerId, board) {
-    for (let h = 0; h < board.length; h++) {
-        const row = board[h];
-        for (let w = 0; w <= BOARD_HEIGHT; w++) {
-            if (row[w] === playerId){
-                row[w] = null;
+    for (let h = 0; h < BOARD_HEIGHT; h++) {
+        for (let w = 0; w < BOARD_WIDTH; w++) {
+            if (board[h][w] === playerId){
+                board[h][w] = null;
             }
         }
     }
 }
 
-function countAllClickedCells() {
-    return Object.keys(PLAYER_INFO).reduce((sum, playerId) => {return sum + PLAYER_INFO[playerId]["cells"].length},0);
+function countAllClickedCells(board) {
+    let clickedCells = 0
+    //console.log(board);
+    for (let h = 0; h < BOARD_HEIGHT; h++) {
+        for (let w = 0; w <= BOARD_WIDTH; w++) {
+            if (board[h] && board[h][w] && PLAYER_INFO[board[h][w]])
+                clickedCells++;
+        }
+    }
+    return clickedCells;
 }
 
 const movesMadeLabel = document.querySelector("#moves-made");
@@ -94,7 +101,7 @@ function updateMovesMadeLabel(movesMade) {
     else
         movesMadeLabel.textContent = movesMade+" moves made";
 }
-updateMovesMadeLabel(countAllClickedCells());
+updateMovesMadeLabel(countAllClickedCells(board));
 
 
 
@@ -126,9 +133,9 @@ const gameInfoCell = document.querySelector("table thead tr th");
 gameInfoCell.setAttribute("colspan", BOARD_WIDTH+"");
 
 // create table cells
-for (let y = 1; y <= BOARD_HEIGHT; y++) {
+for (let y = 0; y < BOARD_HEIGHT; y++) {
     const tableRow = document.createElement("tr");
-    for (let x = 1; x <= BOARD_WIDTH; x++) {
+    for (let x = 0; x < BOARD_WIDTH; x++) {
         const tableCell = document.createElement("td");
         tableCell.setAttribute("id", "cell-"+x+"-"+y);
         tableCell.addEventListener('click', clickCell);
@@ -156,25 +163,24 @@ function clickCell(event) {
     thisCell.classList.add("ownedByPlayer"+activePlayer);
 
     const coordinates = thisCell.getAttribute("id").match(/\d+/g);
-    const clickedCell = { x: Number(coordinates[0]), y: Number(coordinates[1]), };
-
-    PLAYER_INFO[activePlayer]["cells"].push(clickedCell);
+    const x = coordinates[0];
+    const y = coordinates[1];
+    board[x][y] = activePlayer;
 
     // if someone won congratulate winner and clear board
     if (hasPlayerWon(clickedCell, activePlayer) === true){
         alert(PLAYER_INFO[activePlayer]["name"] + " wins !!!");
-        clearBoard();
-
+        board = clearBoard(board);
     // if all cells on the board have been clicked it's a draw
-    } else if (countAllClickedCells() === (BOARD_WIDTH*BOARD_HEIGHT)){
+    } else if (countAllClickedCells(board) === (BOARD_WIDTH*BOARD_HEIGHT)){
         alert("Draw !!!");
-        clearBoard();
+        board = clearBoard(board);
     }
 
     activePlayer = (activePlayer === 1) ? 2 : 1;
 
     updateTurnLabel(activePlayer);
-    updateMovesMadeLabel(countAllClickedCells());
+    updateMovesMadeLabel(countAllClickedCells(board));
 
 }
 
@@ -190,88 +196,40 @@ function mouseLeaveCell(event) {
 
 
 
-function hasPlayerWon(clickedCell, activePlayer) {
+function hasPlayerWon(activePlayer, board) {
 
-    const ownedCells = PLAYER_INFO[activePlayer]['cells'];
-
-    if (countHorizontalNeighbors(clickedCell) >= WINNING_LINE_LENGTH-1)
+    if (horizontalWin(activePlayer) >= WINNING_LINE_LENGTH-1)
         return true;
-    else if (countVerticalNeighbors(clickedCell) >= WINNING_LINE_LENGTH-1)
+    else if (verticalWin(activePlayer) >= WINNING_LINE_LENGTH-1)
         return true;
-    else if (countRightDiagonalNeighbors(clickedCell) >= WINNING_LINE_LENGTH-1)
+    else if (rightDiagonalWin(activePlayer) >= WINNING_LINE_LENGTH-1)
         return true;
-    else if (countLeftDiagonalNeighbors(clickedCell) >= WINNING_LINE_LENGTH-1)
+    else if (leftDiagonalWin(activePlayer) >= WINNING_LINE_LENGTH-1)
         return true;
     return false;
 
 
-    function countVerticalNeighbors(clickedCell) {
-        return consecutiveCells(clickedCell, getNeighbourN) + consecutiveCells(clickedCell, getNeighbourS);
+    function verticalWin(board) {
+
     }
 
-    function countHorizontalNeighbors(clickedCell) {
-        return consecutiveCells(clickedCell, getNeighbourW) + consecutiveCells(clickedCell, getNeighbourE);
+    function horizontalWin(board) {
+
     }
     
-    function countRightDiagonalNeighbors(clickedCell) {
-        return consecutiveCells(clickedCell, getNeighbourNE) + consecutiveCells(clickedCell, getNeighbourSW);
+    function rightDiagonalWin(board) {
+
     }
 
-    function countLeftDiagonalNeighbors(clickedCell) {
-        return consecutiveCells(clickedCell, getNeighbourNW) + consecutiveCells(clickedCell, getNeighbourSE);
+    function leftDiagonalWin(board) {
+
     }
 
-    function consecutiveCells(clickedCell, neighbourDirectionCheck) {
-
-        let neighbours = 0;
-        const pointerCell = {x: clickedCell.x, y: clickedCell.y};
-        const maxDistance = Math.max(BOARD_WIDTH, BOARD_HEIGHT);
-
-        while (neighbours < maxDistance){
-            const neighbourCell = neighbourDirectionCheck(pointerCell);
-            if (neighbourCell){
-                neighbours++;
-                pointerCell.x = neighbourCell.x;
-                pointerCell.y = neighbourCell.y;
-            } else {
-                break;
-            }
-        }
-
-        return neighbours;
-    }
     
     function getNeighbourN(cell) {
         return ownedCells.find(( neighbor ) => neighbor.y-1 === cell.y && neighbor.x === cell.x);
     }
 
-    function getNeighbourNE(cell) {
-        return ownedCells.find(( neighbor ) => neighbor.y-1 === cell.y && neighbor.x+1 === cell.x);
-    }
-
-    function getNeighbourE(cell) {
-        return ownedCells.find(( neighbor ) => neighbor.y === cell.y && (neighbor.x-1) === cell.x);
-    }
-
-    function getNeighbourSE(cell) {
-        return ownedCells.find(( neighbor ) => neighbor.y+1 === cell.y && (neighbor.x+1) === cell.x);
-    }
-
-    function getNeighbourS(cell) {
-        return ownedCells.find(( neighbor ) => neighbor.y+1 === cell.y && neighbor.x === cell.x);
-    }
-
-    function getNeighbourSW(cell) {
-        return ownedCells.find(( neighbor ) => neighbor.y+1 === cell.y && neighbor.x-1 === cell.x);
-    }
-
-    function getNeighbourW(cell) {
-        return ownedCells.find(( neighbor ) => neighbor.y === cell.y && ((neighbor.x+1) === cell.x));
-    }
-
-    function getNeighbourNW(cell) {
-        return ownedCells.find(( neighbor ) => neighbor.y-1 === cell.y && neighbor.x-1 === cell.x);
-    }
 
 }
 

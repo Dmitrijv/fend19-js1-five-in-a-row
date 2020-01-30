@@ -19,6 +19,7 @@ Du får styla spelet på vilket sätt du själv vill.
 ### För G-nivå
 
 Du kan skapa spelbrädet som du vill, antingen genom att skriva HTML, eller skapa elementen med Javascript.
+
 Ditt program skall hålla reda på vems tur det är, och hur många drag som har gjorts sammanlagt.
 Detta skall visas i varsitt textfält (<p>-tagg).
 Du kan använda bokstäverna O och X som märken för kryss och cirkel.

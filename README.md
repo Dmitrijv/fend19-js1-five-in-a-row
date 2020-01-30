@@ -1,5 +1,7 @@
 # FEND19 - JavaScript 1 - Five In a Row
 
+![preview](/img/fiveinarow.png)
+
 Du skall med hjälp av HTML, CSS och Javascript göra ett fem-i-rad-spel.\
 Du skall skapa en HTML-sida, som när den visas i webbläsaren innehåller:\
 En rubrik med spelets namn (du kan välja ett eget namn om du vill)\

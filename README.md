@@ -21,7 +21,7 @@ Du kan skapa spelbrädet som du vill, antingen genom att skriva HTML, eller skap
 Ditt program skall hålla reda på vems tur det är, och hur många drag som har gjorts sammanlagt.\
 Detta skall visas i varsitt textfält (p-tagg).\
 Du kan använda bokstäverna O och X som märken för kryss och cirkel.\
-Du ska ha använt minst 4 CSS-klasser när du har stylat spelet. Varje klass måste innehålla minst en deklaration.\
+Du ska ha använt minst 4 CSS-klasser när du har stylat spelet. Varje klass måste innehålla minst en deklaration.
 
 ### För VG-nivå
 
@@ -33,4 +33,4 @@ eller använda en emoji istället för text (t.ex. ❌ ⭕️, eller annan valfr
 eller använda sig av en bild av något slag.\
 Varje gång en spelare gjort ett drag skall ditt program kontrollera om någon av spelarna har vunnit\
 (alltså fått minst 5 symboler i rad horisontellt, vertikalt eller diagonalt).\
-Om någon av spelarna har vunnit skall detta presenteras i ett eget textfält, och det skall inte gå att spela vidare.\
+Om någon av spelarna har vunnit skall detta presenteras i ett eget textfält, och det skall inte gå att spela vidare.

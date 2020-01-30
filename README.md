@@ -1,11 +1,12 @@
 # FEND19 - JavaScript 1 - Five In a Row
 
-Du skall med hjälp av HTML, CSS och Javascript göra ett fem-i-rad-spel. Du skall skapa en HTML-sida, som när den visas i webbläsaren innehåller:
-En rubrik med spelets namn (du kan välja ett eget namn om du vill)
-Ett spelbräde.
-Ett textfält (<p>-tagg) som berättar vems tur det är att göra ett drag, O eller X.
-Ett textfält (<p>-tagg) som berättar hur många drag som har gjorts totalt.
-Spelbrädet skall bestå av ett rutfält med knappar (<button>).
+Du skall med hjälp av HTML, CSS och Javascript göra ett fem-i-rad-spel.
+Du skall skapa en HTML-sida, som när den visas i webbläsaren innehåller:
+  En rubrik med spelets namn (du kan välja ett eget namn om du vill)
+  Ett spelbräde.
+  Ett textfält (<p>-tagg) som berättar vems tur det är att göra ett drag, O eller X.
+  Ett textfält (<p>-tagg) som berättar hur många drag som har gjorts totalt.
+  Spelbrädet skall bestå av ett rutfält med knappar (<button>).
 Det skall vara åtminstone 25 knappar i höjdled och 25 knappar i sidled stort.
 Den spelare vars tur det är kan klicka på en knapp som inte redan blivit klickad på.
 När spelaren gör det skall spelaren vars tur det är få sin markering på den knappen.

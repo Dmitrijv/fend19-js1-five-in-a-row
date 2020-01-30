@@ -5,7 +5,7 @@ Du skall skapa en HTML-sida, som när den visas i webbläsaren innehåller:
 En rubrik med spelets namn (du kan välja ett eget namn om du vill)
 Ett spelbräde.
 Ett textfält (<p>-tagg) som berättar vems tur det är att göra ett drag, O eller X.
-Ett textfält (<p>-tagg) som berättar hur många drag som har gjorts totalt.
+  Ett textfält (<p>-tagg) som berättar hur många drag som har gjorts totalt.
 Spelbrädet skall bestå av ett rutfält med knappar (<button>).
 Det skall vara åtminstone 25 knappar i höjdled och 25 knappar i sidled stort.
 Den spelare vars tur det är kan klicka på en knapp som inte redan blivit klickad på.

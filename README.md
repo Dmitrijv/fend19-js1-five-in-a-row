@@ -13,7 +13,7 @@ När spelaren gör det skall spelaren vars tur det är få sin markering på den
 Om det är X tur att klicka, så kan denne alltså klicka på en knapp, som då får markeringen “X”.\
 Då går turen över till O.\
 När en knapp väl blivit klickad på så skall det inte hända något om någon av spelarna klickar på den igen.\
-Du får styla spelet på vilket sätt du själv vill.\
+Du får styla spelet på vilket sätt du själv vill.
 
 ### För G-nivå
 

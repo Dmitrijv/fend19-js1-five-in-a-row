@@ -138,6 +138,7 @@ function clickCell(event) {
   thisCell.textContent = PLAYER_INFO[activePlayer]["marker"];
   thisCell.classList.add("ownedByPlayer" + activePlayer);
 
+  // cell IDs follow "cell-x-y" format
   const coordinates = thisCell.getAttribute("id").match(/\d+/g);
   const clickedCell = { x: Number(coordinates[0]), y: Number(coordinates[1]) };
 
@@ -196,7 +197,6 @@ function hasPlayerWon(clickedCell, activePlayer) {
     let neighbours = 0;
     const pointerCell = { x: clickedCell.x, y: clickedCell.y };
     const maxDistance = Math.max(BOARD_WIDTH, BOARD_HEIGHT);
-
     while (neighbours < maxDistance) {
       const neighbourCell = neighbourDirectionCheck(pointerCell);
       if (neighbourCell) {
@@ -207,7 +207,6 @@ function hasPlayerWon(clickedCell, activePlayer) {
         break;
       }
     }
-
     return neighbours;
   }
 

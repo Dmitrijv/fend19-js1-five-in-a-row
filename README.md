@@ -1,6 +1,6 @@
 # FEND19 - JavaScript 1 - Five In a Row
 
-![preview](/img/fiveinarow.png)
+![preview](/readme/fiveinarow.png)
 
 ## Description
 

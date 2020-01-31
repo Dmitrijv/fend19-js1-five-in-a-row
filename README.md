@@ -10,7 +10,7 @@ The goal of the game is to order unbroken row of five signs horizontally, vertic
 
 When a cell is clicked it's added to the list of cells owned by the respective player.
 
-```
+``` js
   // cell IDs follow "cell-x-y" format
   const coordinates = thisCell.getAttribute("id").match(/\d+/g);
   const clickedCell = { x: Number(coordinates[0]), y: Number(coordinates[1]) };

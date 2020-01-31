@@ -8,7 +8,7 @@ Five In a Row is an abstract strategy board game. Players alternate turns placin
 
 ## Win condition check
 
-When a cell is clicked it's added to the list of cells owned by the respective player.
+When a cell is clicked it's added to the list of cells owned by the active player.
 
 ```js
 // all cell element IDs follow "cell-x-y" format

@@ -38,8 +38,8 @@ Om någon av spelarna har vunnit skall detta presenteras i ett eget textfält, o
 
  */
 
-const BOARD_HEIGHT = 20;
-const BOARD_WIDTH = 20;
+const BOARD_HEIGHT = 25;
+const BOARD_WIDTH = 25;
 const WINNING_LINE_LENGTH = 5;
 
 let activePlayer = 1;
@@ -138,7 +138,7 @@ function clickCell(event) {
   thisCell.textContent = PLAYER_INFO[activePlayer]["marker"];
   thisCell.classList.add("ownedByPlayer" + activePlayer);
 
-  // cell IDs follow "cell-x-y" format
+  // all cell element IDs follow "cell-x-y" format
   const coordinates = thisCell.getAttribute("id").match(/\d+/g);
   const clickedCell = { x: Number(coordinates[0]), y: Number(coordinates[1]) };
 

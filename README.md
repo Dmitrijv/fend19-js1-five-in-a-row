@@ -37,7 +37,7 @@ function hasPlayerWon(clickedCell, activePlayer) {
   const ownedCells = PLAYER_INFO[activePlayer]["cells"];
   if (countHorizontalNeighbors(clickedCell) >= WINNING_LINE_LENGTH - 1) return true;
   else if (countVerticalNeighbors(clickedCell) >= WINNING_LINE_LENGTH - 1) return true;
-  ...
+  // and so on
 ```
 
 Win conditions are determined by counting consecutive cells in various directions.
